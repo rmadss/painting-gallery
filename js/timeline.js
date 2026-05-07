@@ -167,7 +167,7 @@ function buildTimeline() {
     const barWidth = Math.max(barEnd - barStart, 1);
 
     // Painting dots
-    const sorted = [...era.paintings].sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+    const sorted = getPaintingsByEra(era.id).sort((a, b) => (a.date || "").localeCompare(b.date || ""));
     const dotsHTML = sorted.map((p) => {
       const pct = p.date
         ? ((toMonthNum(p.date.slice(0, 7)) - globalStart) / totalMonths) * 100
@@ -225,7 +225,7 @@ function buildTimeline() {
     section.dataset.eraId = era.id;
 
     const dateRange     = formatEraDateRange(era.startDate, era.endDate);
-    const paintingCount = era.paintings.length;
+    const paintingCount = getPaintingsByEra(era.id).length;
 
     section.innerHTML = `
       <header class="era-header">
@@ -258,7 +258,7 @@ function buildTimeline() {
     cardSections.appendChild(section);
 
     const grid2 = section.querySelector(`#era-paintings-${era.id}`);
-    const sorted = [...era.paintings].sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+    const sorted = getPaintingsByEra(era.id).sort((a, b) => (a.date || "").localeCompare(b.date || ""));
     sorted.forEach((painting) => {
       grid2.appendChild(buildPaintingCard(painting, era));
     });
