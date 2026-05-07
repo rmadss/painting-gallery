@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeline — The Archive</title>
+  <meta name="description" content="A chronological archive of all paintings, grouped by era. Search and filter by medium, tag, or keyword." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div id="navbar"></div>
+
+  <main>
+    <div class="container">
+
+      <!-- Page header -->
+      <header class="page-header fade-up">
+        <p class="eyebrow">Archive</p>
+        <h1>Timeline</h1>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; max-width: none;">
+          <span id="total-count">—</span> paintings across <span id="era-count">—</span> eras.
+          Click any painting to view the full piece.
+        </p>
+      </header>
+
+      <!-- ─── Sticky filter bar ─────────────────────────────── -->
+      <div class="timeline-controls">
+        <div class="container">
+          <div class="timeline-search-row">
+
+            <!-- Search -->
+            <div class="search-input-wrapper">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+              <input
+                type="text"
+                id="searchInput"
+                class="search-input"
+                placeholder="Search by title, medium, description…"
+                autocomplete="off"
+                aria-label="Search paintings"
+              />
+            </div>
+
+            <!-- Medium filter -->
+            <select id="mediumSelect" class="medium-select" aria-label="Filter by medium">
+              <option value="">All mediums</option>
+              <!-- Options injected by timeline.js -->
+            </select>
+
+            <!-- View toggle -->
+            <button id="viewToggle" class="view-toggle-btn" aria-label="Switch to card view" title="Switch to card view">
+              <!-- Timeline icon (shown when in card view — click to go back to timeline) -->
+              <svg id="iconGrid" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                   style="display:none;">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+                <circle cx="8" cy="6" r="2" fill="currentColor" stroke="none"/>
+                <circle cx="14" cy="12" r="2" fill="currentColor" stroke="none"/>
+                <circle cx="10" cy="18" r="2" fill="currentColor" stroke="none"/>
+              </svg>
+              <!-- Grid icon (shown when in timeline view — click to go to card view) -->
+              <svg id="iconList" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+              </svg>
+            </button>
+
+          </div>
+
+          <!-- Tag pills -->
+          <div class="tag-filters" id="tagFilters">
+            <!-- Injected by timeline.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── Timeline body ─────────────────────────────────── -->
+      <div class="timeline-body" id="timelineBody">
+        <!-- Era sections injected by timeline.js -->
+      </div>
+
+      <!-- No results state -->
+      <div class="no-results" id="noResults">
+        No paintings match your search. Try different keywords or clear the filters.
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© <span id="footer-year"></span> — All paintings are original works.</p>
+      <p>Built with plain HTML · Hosted on GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script src="data/paintings.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/timeline.js"></script>
+  <script>
+    document.getElementById("footer-year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

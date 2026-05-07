@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — The Archive</title>
+  <meta name="description" content="About the artist — statement, philosophy, and approach to painting." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div id="navbar"></div>
+
+  <main>
+    <div class="container--narrow" style="padding-top: 4rem; padding-bottom: 6rem;">
+
+      <!-- Page header -->
+      <header class="fade-up" style="margin-bottom: 3.5rem;">
+        <p style="font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;">
+          About
+        </p>
+        <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;">
+          The painter behind<br />the archive.
+        </h1>
+      </header>
+
+      <!-- ─── Artist Statement ─────────────────────────────── -->
+      <section class="about-section fade-up fade-up-delay-1">
+        <h2>Statement</h2>
+        <!--
+          EDIT THIS: Replace with your own artist statement.
+          Keep it honest and direct — avoid art-world jargon.
+        -->
+        <p>
+          I paint slowly. Most of my work comes from looking at ordinary things
+          for longer than feels comfortable — a lamp left on after dark, the
+          specific quality of winter light on a rooftop, the geometry of a doorway
+          nobody else seems to notice.
+        </p>
+        <p>
+          I'm not trying to make beautiful objects. I'm trying to record something
+          true about a moment — the temperature of the light, the weight of the
+          silence. Whether I succeed is a separate question.
+        </p>
+      </section>
+
+      <!-- ─── Philosophy ───────────────────────────────────── -->
+      <section class="about-section fade-up fade-up-delay-2">
+        <h2>Approach</h2>
+        <p>
+          Most paintings start with a single observation I can't let go of. I work
+          from life when I can and from photographs when I can't — though I try to
+          use photographs the way a writer uses notes, not as something to copy.
+        </p>
+        <p>
+          I'm drawn to the moment just before or after something happens: the empty
+          chair, the unlit room, the street an hour before anyone wakes up. There's
+          a stillness in those moments that I find more interesting than drama.
+        </p>
+        <p>
+          I'm not attached to a single medium. I use whatever gets closest to what
+          I'm after. Oil for its slowness, acrylic when I need to work faster, the
+          occasional watercolor sketch to loosen up.
+        </p>
+      </section>
+
+      <!-- ─── Materials ────────────────────────────────────── -->
+      <section class="about-section fade-up fade-up-delay-3">
+        <h2>Materials</h2>
+        <p style="margin-bottom: 1rem;">
+          What's currently on the table:
+        </p>
+        <!--
+          EDIT THIS: Update with your actual materials.
+          The format is: category | detail
+        -->
+        <ul class="materials-list">
+          <li>
+            <span class="material-category">Oils</span>
+            <span>Williamsburg, Gamblin — titanium white, raw umber, burnt sienna, ivory black, ultramarine, yellow ochre</span>
+          </li>
+          <li>
+            <span class="material-category">Acrylics</span>
+            <span>Golden Heavy Body for larger work that needs faster drying</span>
+          </li>
+          <li>
+            <span class="material-category">Surfaces</span>
+            <span>Linen (preferred), cotton canvas, wood panel for smaller pieces</span>
+          </li>
+          <li>
+            <span class="material-category">Brushes</span>
+            <span>Mostly flats and filberts — Silver Brush, Rosemary & Co.</span>
+          </li>
+          <li>
+            <span class="material-category">Medium</span>
+            <span>Linseed oil, occasionally Gamsol for cleaning and lean layers</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ─── By the numbers ────────────────────────────────── -->
+      <section class="about-section fade-up fade-up-delay-3" style="border-top: 1px solid var(--border-subtle); padding-top: 2.5rem;">
+        <h2>By the numbers</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 1.5rem 2rem; margin-top: 1.5rem;">
+          <div>
+            <div id="about-stat-paintings" style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--accent);">—</div>
+            <div style="font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.2rem;">Paintings</div>
+          </div>
+          <div>
+            <div id="about-stat-eras" style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--accent);">—</div>
+            <div style="font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.2rem;">Eras</div>
+          </div>
+          <div>
+            <div id="about-stat-mediums" style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--accent);">—</div>
+            <div style="font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.2rem;">Mediums</div>
+          </div>
+          <div>
+            <div id="about-stat-years" style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--accent);">—</div>
+            <div style="font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.2rem;">Years active</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── CTA ──────────────────────────────────────────── -->
+      <div style="margin-top: 3rem;">
+        <a href="timeline.html" class="btn btn-outline">
+          Browse the archive →
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© <span id="footer-year"></span> — All paintings are original works.</p>
+      <p>Built with plain HTML · Hosted on GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script src="data/paintings.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    const _s = getStats();
+    document.getElementById("about-stat-paintings").textContent = _s.total;
+    document.getElementById("about-stat-eras").textContent      = _s.eras;
+    document.getElementById("about-stat-mediums").textContent   = _s.mediums;
+    document.getElementById("about-stat-years").textContent     =
+      _s.yearStart && _s.yearEnd
+        ? (_s.yearStart === _s.yearEnd ? _s.yearStart : _s.yearStart + "–" + _s.yearEnd)
+        : "—";
+    document.getElementById("footer-year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — The Archive</title>
+  <meta name="description" content="Browse all paintings — filter by medium, tag, or keyword. Switch between card and table view." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/gallery.css" />
+</head>
+<body>
+
+  <div id="navbar"></div>
+
+  <main>
+    <div class="container">
+
+      <!-- Page header -->
+      <header class="page-header fade-up">
+        <p class="eyebrow">All works</p>
+        <h1>Gallery</h1>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; max-width: none;">
+          <span id="visible-count">—</span> of <span id="total-count">—</span> paintings
+        </p>
+      </header>
+
+      <!-- ─── Sticky filter bar ──────────────────────────── -->
+      <div class="timeline-controls">
+        <div>
+          <div class="timeline-search-row">
+
+            <!-- Search -->
+            <div class="search-input-wrapper">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+              <input
+                type="text"
+                id="searchInput"
+                class="search-input"
+                placeholder="Search title, medium, description, tag…"
+                autocomplete="off"
+                aria-label="Search paintings"
+              />
+            </div>
+
+            <!-- Medium filter -->
+            <select id="mediumSelect" class="medium-select" aria-label="Filter by medium">
+              <option value="">All mediums</option>
+            </select>
+
+            <!-- Era filter -->
+            <select id="eraSelect" class="medium-select" aria-label="Filter by era">
+              <option value="">All eras</option>
+            </select>
+
+            <!-- View toggle -->
+            <div class="view-toggle" role="group" aria-label="View mode">
+              <button id="btnCard" class="view-btn active" title="Card view" aria-pressed="true">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                  <rect x="3"  y="3"  width="7" height="7" rx="1"/>
+                  <rect x="14" y="3"  width="7" height="7" rx="1"/>
+                  <rect x="3"  y="14" width="7" height="7" rx="1"/>
+                  <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+              </button>
+              <button id="btnTable" class="view-btn" title="Table view" aria-pressed="false">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                  <line x1="3" y1="6"  x2="21" y2="6"/>
+                  <line x1="3" y1="12" x2="21" y2="12"/>
+                  <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Tag pills -->
+          <div class="tag-filters" id="tagFilters"></div>
+        </div>
+      </div>
+
+      <!-- ─── Card grid ──────────────────────────────────── -->
+      <div id="cardGrid" class="gallery-grid"></div>
+
+      <!-- ─── Table view ────────────────────────────────── -->
+      <div id="tableView" class="gallery-table-wrapper" style="display:none;">
+        <table class="gallery-table">
+          <thead>
+            <tr>
+              <th class="col-thumb"></th>
+              <th class="sortable" data-col="title">
+                Title <span class="sort-icon">↕</span>
+              </th>
+              <th class="sortable" data-col="date">
+                Date <span class="sort-icon">↕</span>
+              </th>
+              <th class="sortable col-medium" data-col="medium">
+                Medium <span class="sort-icon">↕</span>
+              </th>
+              <th class="col-dims">Size</th>
+              <th class="col-era">Era</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+
+      <!-- No results -->
+      <div class="no-results" id="noResults">
+        No paintings match your search. Try different keywords or clear the filters.
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© <span id="footer-year"></span> — All paintings are original works.</p>
+      <p>Built with plain HTML · Hosted on GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script src="data/paintings.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/gallery.js"></script>
+  <script>
+    document.getElementById("footer-year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

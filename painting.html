@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painting — The Archive</title>
+  <!-- Title and meta description are updated dynamically by painting.js -->
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div id="navbar"></div>
+
+  <main>
+    <div class="container">
+      <div class="painting-detail" id="paintingDetail">
+        <!-- Content injected by painting.js -->
+        <div style="padding: 5rem 0; text-align: center; color: var(--text-muted);">
+          Loading…
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© <span id="footer-year"></span> — All paintings are original works.</p>
+      <p>Built with plain HTML · Hosted on GitHub Pages</p>
+    </div>
+  </footer>
+
+  <script src="data/paintings.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/painting.js"></script>
+  <script>
+    document.getElementById("footer-year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Archive — Paintings</title>
+  <meta name="description" content="A personal archive of paintings — exploring light, place, and the passage of time." />
+
+  <!-- Tailwind CDN (Play CDN — no build step needed) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Navigation (injected by js/nav.js) -->
+  <div id="navbar"></div>
+
+  <!-- ─── Hero ───────────────────────────────────────────── -->
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-layout">
+
+          <!-- Text column -->
+          <div class="hero-content">
+            <p class="hero-eyebrow fade-up">Painting archive</p>
+
+            <h1 class="hero-title fade-up fade-up-delay-1">
+              A record of<br />what I noticed.
+            </h1>
+
+            <p class="hero-subtitle fade-up fade-up-delay-2">
+              Paintings made slowly, mostly from life —
+              interiors, city fragments, and the light
+              that keeps changing.
+            </p>
+
+            <div class="hero-actions fade-up fade-up-delay-3">
+              <a href="timeline.html" class="btn btn-primary">
+                Browse the archive
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+              <a href="about.html" class="btn btn-outline">About</a>
+            </div>
+          </div>
+
+          <!-- Featured image column -->
+          <div class="hero-image-col fade-up fade-up-delay-2">
+            <a href="painting.html?id=reading-lamp" class="hero-image-wrapper">
+              <!--
+                Replace this src with your featured painting's image path.
+                Recommended: one of your strongest recent pieces.
+              -->
+              <img
+                src="https://placehold.co/680x900/242019/a89880?text=Featured+Painting"
+                alt="Featured painting — Reading Lamp, oil on linen, 2024"
+                loading="eager"
+              />
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section style="border-top: 1px solid var(--border-subtle); padding: 3rem 0;">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 2rem;">
+
+          <div style="padding: 1rem 0;">
+            <div id="stat-paintings" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--accent);">—</div>
+            <div style="font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.25rem;">Paintings</div>
+          </div>
+
+          <div style="padding: 1rem 0;">
+            <div id="stat-eras" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--accent);">—</div>
+            <div style="font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.25rem;">Eras</div>
+          </div>
+
+          <div style="padding: 1rem 0;">
+            <div id="stat-mediums" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--accent);">—</div>
+            <div style="font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.25rem;">Mediums</div>
+          </div>
+
+          <div style="padding: 1rem 0;">
+            <div id="stat-years" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--accent);">—</div>
+            <div style="font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.25rem;">Years active</div>
+          </div>
+
+          <div style="padding: 1rem 0; grid-column: span 2;">
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; max-width: 55ch;">
+              This is a personal archive — not a portfolio in the commercial sense.
+              It's a record of the work, in the order it was made.
+            </p>
+            <a href="timeline.html" style="display: inline-block; margin-top: 1rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);">
+              View timeline →
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ─── Footer ─────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <p>© <span id="footer-year"></span> — All paintings are original works.</p>
+      <p>Built with plain HTML · Hosted on GitHub Pages</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/paintings.js"></script>
+  <script src="js/nav.js"></script>
+  <script>
+    // Populate stats from data
+    const _s = getStats();
+    document.getElementById("stat-paintings").textContent = _s.total;
+    document.getElementById("stat-eras").textContent      = _s.eras;
+    document.getElementById("stat-mediums").textContent   = _s.mediums;
+    document.getElementById("stat-years").textContent     =
+      _s.yearStart && _s.yearEnd
+        ? (_s.yearStart === _s.yearEnd ? _s.yearStart : _s.yearStart + "–" + _s.yearEnd)
+        : "—";
+    document.getElementById("footer-year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
