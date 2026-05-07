@@ -655,6 +655,18 @@ const PAINTINGS = [
     tags: ["abstract"],
     description: "",
   },
+  {
+    id: "innerspeaker",
+    era: "sound-in-color",
+    title: "Innerspeaker",
+    image: "public/images/innerspeaker.JPEG",
+    thumbnail: "public/images/thumbs/innerspeaker.JPEG",
+    date: "2020-09",
+    medium: "Oil on canvas",
+    dimensions: "8.5 x 11 inches",
+    tags: ["abstract"],
+    description: "",
+  },
 ];
 
 // ─── Utility helpers ──────────────────────────────────────────────────────────
