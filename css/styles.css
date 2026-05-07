@@ -922,7 +922,7 @@ a:hover { color: var(--accent); }
 .tl-era-track {
   flex: 1;
   position: relative;
-  height: 48px;
+  height: 64px;
   overflow: visible;
 }
 
@@ -941,7 +941,6 @@ a:hover { color: var(--accent); }
 /* Painting dots */
 .tl-dot {
   position: absolute;
-  top: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;

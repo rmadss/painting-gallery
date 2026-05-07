@@ -169,6 +169,17 @@ function buildTimeline() {
 
     // Painting dots
     const sorted = getPaintingsByEra(era.id).sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+
+    // Group paintings by month so same-date dots can be staggered vertically
+    const dateGroups = {};
+    sorted.forEach((p) => {
+      const key = p.date ? p.date.slice(0, 7) : "__unknown__";
+      if (!dateGroups[key]) dateGroups[key] = [];
+      dateGroups[key].push(p);
+    });
+
+    const STACK_STEP = 14; // px between stacked dots within the same month
+
     const dotsHTML = sorted.map((p) => {
       const pct = p.date
         ? ((toMonthNum(p.date.slice(0, 7)) - globalStart) / totalMonths) * 100
@@ -176,10 +187,19 @@ function buildTimeline() {
       const thumb = p.thumbnail
         ? getImageUrl(p.thumbnail)
         : "";
+
+      // Vertical stagger for same-date collisions
+      const dateKey   = p.date ? p.date.slice(0, 7) : "__unknown__";
+      const group     = dateGroups[dateKey];
+      const idx       = group.indexOf(p);
+      const groupSize = group.length;
+      const vOffset   = (idx - (groupSize - 1) / 2) * STACK_STEP; // px from row center
+      const topStyle  = vOffset === 0 ? "50%" : `calc(50% + ${vOffset}px)`;
+
       return `
         <a href="painting.html?id=${p.id}"
            class="tl-dot"
-           style="left:${pct.toFixed(2)}%"
+           style="left:${pct.toFixed(2)}%;top:${topStyle}"
            data-painting-id="${p.id}"
            data-title="${p.title.toLowerCase()}"
            data-medium="${p.medium.toLowerCase()}"
