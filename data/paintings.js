@@ -587,7 +587,7 @@ function getAllMediums() {
  *
  * @param {string} path — root-relative path from paintings.js (e.g. "public/images/...")
  */
-const BASE_PATH = "/painting-gallery"; // e.g. "/painting-website" for GitHub Pages subdirectory deployments
+const BASE_PATH = location.hostname === "localhost" || location.hostname === "127.0.0.1" ? "" : "/painting-gallery";
 function getImageUrl(path) {
   return BASE_PATH + "/" + path;
 }
