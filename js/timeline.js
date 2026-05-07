@@ -138,8 +138,9 @@ function buildTimeline() {
   const eraEndDates   = eras.map((e) => e.endDate).filter(Boolean);
   const allBounds     = [...allDates, ...eraStartDates, ...eraEndDates].sort();
 
-  const globalStart = toMonthNum(allBounds[0]);
-  const globalEnd   = toMonthNum(allBounds[allBounds.length - 1]);
+  const PADDING_MONTHS = 6; // breathing room before first and after last painting
+  const globalStart = toMonthNum(allBounds[0]) - PADDING_MONTHS;
+  const globalEnd   = toMonthNum(allBounds[allBounds.length - 1]) + PADDING_MONTHS;
   const totalMonths = Math.max(globalEnd - globalStart, 1);
 
   // Build the ruler (year ticks)

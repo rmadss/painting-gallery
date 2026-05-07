@@ -45,12 +45,12 @@ const ERAS = [
       "Repetition, rhythm, and the strange comfort of pattern. An exploration of structure as both constraint and freedom.",
   },
   {
-    id: "reprise-the-return",
-    title: "Reprise: The Return",
+    id: "places-and-presence",
+    title: "Places & Presence",
     startDate: "2024-07",
-    endDate: null,
+    endDate: "Present",
     description:
-      "Coming back to portraiture with new eyes. The same subjects — faces, figures, icons — but filtered through everything that came between.",
+      "Exploring the relationship between space and identity. Capturing the essence of places and the presence they hold.",
   },
 ];
 
@@ -523,9 +523,6 @@ const PAINTINGS = [
     tags: ["abstract", "pattern"],
     description: "",
   },
-
-  // ── Era: Patterned Infinity ───────────────────────────────────────────────
-
   {
     id: "spiraliing-out",
     era: "patterned-infinity",
@@ -550,6 +547,43 @@ const PAINTINGS = [
     tags: ["abstract", "pattern"],
     description: "",
   },
+  {
+    id: "abigail",
+    era: "patterned-infinity",
+    title: "Abigail",
+    image: "public/images/abigail.JPEG",
+    thumbnail: "public/images/thumbs/abigail.JPEG",
+    date: "2025-07",
+    medium: "Oil on canvas",
+    dimensions: "18 x 24 inches",
+    tags: ["abstract", "pattern"],
+    description: "",
+  },
+  {
+    id: "flowers-in-vase-1",
+    era: "patterned-infinity",
+    title: "Flowers in Vase 1",
+    image: "public/images/flowers-in-vase-1.JPEG",
+    thumbnail: "public/images/thumbs/flowers-in-vase-1.JPEG",
+    date: "2025-03",
+    medium: "Oil on canvas",
+    dimensions: "18 x 24 inches",
+    tags: ["abstract", "pattern"],
+    description: "",
+  },
+  {
+    id: "ohio-stadium",
+    era: "places-and-presence",
+    title: "Ohio Stadium",
+    image: "public/images/ohio-stadium.JPEG",
+    thumbnail: "public/images/thumbs/ohio-stadium.JPEG",
+    date: "2025-03",
+    medium: "Oil on canvas",
+    dimensions: "18 x 24 inches",
+    tags: ["abstract", "pattern"],
+    description: "",
+  },
+  
 
 ];
 
