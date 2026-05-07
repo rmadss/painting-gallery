@@ -48,7 +48,7 @@ const ERAS = [
     id: "places-and-presence",
     title: "Places & Presence",
     startDate: "2024-07",
-    endDate: "Present",
+    endDate: null,
     description:
       "Exploring the relationship between space and identity. Capturing the essence of places and the presence they hold.",
   },
@@ -549,7 +549,7 @@ const PAINTINGS = [
   },
   {
     id: "abigail",
-    era: "patterned-infinity",
+    era: "places-and-presence",
     title: "Abigail",
     image: "public/images/abigail.JPEG",
     thumbnail: "public/images/thumbs/abigail.JPEG",
@@ -561,7 +561,7 @@ const PAINTINGS = [
   },
   {
     id: "flowers-in-vase-1",
-    era: "patterned-infinity",
+    era: "places-and-presence",
     title: "Flowers in Vase 1",
     image: "public/images/flowers-in-vase-1.JPEG",
     thumbnail: "public/images/thumbs/flowers-in-vase-1.JPEG",
