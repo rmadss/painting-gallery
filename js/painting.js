@@ -108,10 +108,11 @@
             <td>Size</td>
             <td>${painting.dimensions}</td>
           </tr>` : ""}
+          ${painting.status && painting.status !== "not-available" ? `
           <tr>
             <td>Status</td>
             <td><span class="status-badge ${statusInfo.cls}">${statusInfo.label}</span></td>
-          </tr>
+          </tr>` : ""}
         </table>
 
         ${painting.description ? `
