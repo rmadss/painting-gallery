@@ -13,10 +13,8 @@
 const NAV_LINKS = [
   { href: "index.html",    label: "Home" },
   { href: "about.html",   label: "About" },
-  { href: "timeline.html", label: "Timeline" },
   { href: "gallery.html",  label: "Gallery" },
-  // Placeholders — uncomment and build these pages when ready:
-  // { href: "log.html",      label: "Process Log" },
+  { href: "timeline.html", label: "Timeline" },
 ];
 
 // ─── Theme ────────────────────────────────────────────────
