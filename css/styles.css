@@ -279,6 +279,25 @@ a:hover { color: var(--accent); }
   color: var(--text-primary);
 }
 
+/* ── Dev banner ───────────────────────────────────────────── */
+.dev-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: center;
+}
+.dev-banner svg {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
 /* ── Hero (index.html) ────────────────────────────────────── */
 .hero {
   min-height: calc(100vh - 60px);
