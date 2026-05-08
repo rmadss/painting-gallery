@@ -1,5 +1,5 @@
-﻿/**
- * paintings.js — Central data source for all paintings and eras.
+/**
+ * paintings.js � Central data source for all paintings and eras.
  *
  * HOW TO ADD A PAINTING:
  *  1. Add your image files to /public/images/<era-slug>/
@@ -18,7 +18,7 @@
  * IMAGE PATHS: root-relative (e.g. "public/images/...").
  */
 
-// ─── Era metadata ─────────────────────────────────────────────────────────────
+// --- Era metadata -------------------------------------------------------------
 const ERAS = [
   {
     id: "faces-and-foundations",
@@ -26,7 +26,7 @@ const ERAS = [
     startDate: "2017-01",
     endDate: null,
     description:
-      "Where it all began — portraits of musicians, icons, and personal figures that shaped the practice. Learning to read a face, trust a likeness, and find the feeling beneath the features.",
+      "Where it all began � portraits of musicians, icons, and personal figures that shaped the practice. Learning to read a face, trust a likeness, and find the feeling beneath the features.",
   },
   {
     id: "sound-in-color",
@@ -34,7 +34,7 @@ const ERAS = [
     startDate: "2017-07",
     endDate: null,
     description:
-      "Album covers, abstraction, and the visual language of music. An experiment in translating sound into colour and form — less about likeness, more about feeling.",
+      "Album covers, abstraction, and the visual language of music. An experiment in translating sound into colour and form � less about likeness, more about feeling.",
   },
   {
     id: "patterned-infinity",
@@ -54,10 +54,10 @@ const ERAS = [
   },
 ];
 
-// ─── Paintings ────────────────────────────────────────────────────────────────
+// --- Paintings ----------------------------------------------------------------
 const PAINTINGS = [
 
-  // ── Era: Faces & Foundations ──────────────────────────────────────────────
+  // -- Era: Faces & Foundations ----------------------------------------------
 
   {
     id: "john-lennon",
@@ -69,7 +69,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician", "the beatles"],
-    description: "",
+    description: "",`n    status: "not-available",
     process: [
       "public/images/process/john-lennon-wip-1.JPEG",
       "public/images/process/john-lennon-wip-2.JPEG",
@@ -86,7 +86,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician", "the beatles"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "george-harrison",
@@ -98,7 +98,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician", "the beatles"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "ringo-starr",
@@ -110,7 +110,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician", "the beatles"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "john-mayer",
@@ -122,7 +122,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "jimi-hendrix",
@@ -134,7 +134,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "elvis-presley",
@@ -146,7 +146,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "jim-morrison",
@@ -158,7 +158,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "36 x 24 inches",
     tags: ["portrait", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "mac-demarco",
@@ -170,7 +170,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "bob-marley",
@@ -182,7 +182,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "36 x 24 inches",
     tags: ["portrait", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "john-denver",
@@ -194,7 +194,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "mac-demarco-2",
@@ -206,7 +206,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "36 x 24 inches",
     tags: ["portrait", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "johnny-cash",
@@ -218,7 +218,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "the-dark-knight",
@@ -230,7 +230,7 @@ const PAINTINGS = [
     medium: "Acrylic on drywall",
     dimensions: "8 feet x 10 feet",
     tags: ["portrait", "film", "character"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "john-lennon-2",
@@ -242,7 +242,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician", "the beatles"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "jon-hamm",
@@ -254,7 +254,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "film"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "self-portrait-2",
@@ -266,7 +266,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "3 feet x 6 feet",
     tags: ["portrait", "self portrait"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "father-john-misty",
@@ -278,7 +278,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "childish-gambino",
@@ -290,7 +290,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 24 inches",
     tags: ["album cover", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "jim-croce-life-and-times",
@@ -302,7 +302,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 24 inches",
     tags: ["album cover", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "willy-wonka",
@@ -314,7 +314,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 24 inches",
     tags: ["film", "character"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "gloria",
@@ -326,7 +326,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "9 x 12 inches",
     tags: ["abstract", "self portrait"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "lil-pump",
@@ -338,7 +338,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "michael-jackson",
@@ -350,7 +350,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "musician", "legend"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "heres-johnny",
@@ -362,7 +362,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "film", "character", "horror"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "captain-jack-sparrow",
@@ -374,7 +374,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "film", "character"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "self-portrait-1",
@@ -386,7 +386,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "self portrait"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "ezekiel-25-17",
@@ -398,7 +398,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["film", "character"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "pennywise",
@@ -410,7 +410,7 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 36 inches",
     tags: ["portrait", "film", "character", "horror"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "the-doors",
@@ -422,7 +422,7 @@ const PAINTINGS = [
     medium: "",
     dimensions: "",
     tags: ["portrait", "musician", "band", "legend"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "american-psycho",
@@ -434,7 +434,7 @@ const PAINTINGS = [
     medium: "",
     dimensions: "",
     tags: ["portrait", "film", "character"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "self-portrait-10",
@@ -446,10 +446,10 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["abstract", "pattern"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
 
-  // ── Era: Sound in Color ───────────────────────────────────────────────────
+  // -- Era: Sound in Color ---------------------------------------------------
 
   {
     id: "stuck-on-mt-pleasant",
@@ -461,7 +461,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["abstract"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "house-on-the-prairie",
@@ -473,7 +473,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["abstract"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "currents",
@@ -485,7 +485,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["abstract"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "self-portrait-3",
@@ -497,7 +497,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["abstract", "self portrait"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "under-pressure",
@@ -509,7 +509,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["album cover"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "man-on-the-moon",
@@ -521,7 +521,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["abstract", "pattern"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "spiraliing-out",
@@ -533,7 +533,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["abstract", "pattern"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "self-portrait-9",
@@ -545,7 +545,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["abstract", "pattern"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "abigail",
@@ -557,7 +557,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "18 x 24 inches",
     tags: ["abstract", "pattern"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "flowers-in-vase-1",
@@ -569,7 +569,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "18 x 24 inches",
     tags: ["abstract", "pattern"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "ohio-stadium",
@@ -581,7 +581,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "18 x 24 inches",
     tags: ["abstract", "pattern"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "davy-jones",
@@ -593,7 +593,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "12 x 36 inches",
     tags: ["abstract", "pattern"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "van-gogh-self-portrait-with-grey-felt-hat",
@@ -605,7 +605,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["abstract", "pattern"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "patterns-2",
@@ -617,7 +617,7 @@ const PAINTINGS = [
     medium: "Marker on paper",
     dimensions: "8.5 x 11 inches",
     tags: ["abstract"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "patterns-1",
@@ -629,7 +629,7 @@ const PAINTINGS = [
     medium: "Marker on paper",
     dimensions: "8.5 x 11 inches",
     tags: ["abstract"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "patterns-3",
@@ -641,7 +641,7 @@ const PAINTINGS = [
     medium: "Marker on paper",
     dimensions: "8.5 x 11 inches",
     tags: ["abstract"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "seashells",
@@ -653,7 +653,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "12 x 36 inches",
     tags: ["abstract"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "innerspeaker",
@@ -665,7 +665,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["abstract"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "eye-of-perception",
@@ -677,7 +677,7 @@ const PAINTINGS = [
     medium: "Oil on canvas",
     dimensions: "24 x 24 inches",
     tags: ["abstract"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
   {
     id: "girl-in-the-corner-booth",
@@ -689,11 +689,11 @@ const PAINTINGS = [
     medium: "Acrylic on canvas",
     dimensions: "24 x 24 inches",
     tags: ["abstract"],
-    description: "",
+    description: "",`n    status: "not-available",
   },
 ];
 
-// ─── Utility helpers ──────────────────────────────────────────────────────────
+// --- Utility helpers ----------------------------------------------------------
 
 /** Returns all eras in order. */
 function getEras() {
@@ -781,5 +781,18 @@ function getStats() {
 const BASE_PATH = location.hostname === "localhost" || location.hostname === "127.0.0.1" ? "" : "/painting-gallery";
 function getImageUrl(path) {
   return BASE_PATH + "/" + path;
+}
+
+/**
+ * Returns a display label and CSS class for a painting's status.
+ * Statuses: "not-available" | "available" | "sold"
+ */
+function getStatusInfo(status) {
+  switch (status) {
+    case "available":     return { label: "Available",      cls: "status--available" };
+    case "sold":          return { label: "Sold",           cls: "status--sold" };
+    case "not-available":
+    default:              return { label: "Not Available",  cls: "status--unavailable" };
+  }
 }
 

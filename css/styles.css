@@ -1469,3 +1469,82 @@ footer {
 
 /* Make process thumbs show pointer */
 .process-thumb { cursor: zoom-in; }
+
+/* ── Status badges ─────────────────────────────────────────── */
+.status-badge {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  font-family: "Inter", sans-serif;
+  white-space: nowrap;
+}
+.status--available {
+  background: color-mix(in srgb, #4caf7d 15%, transparent);
+  color: #4caf7d;
+  border-color: color-mix(in srgb, #4caf7d 40%, transparent);
+}
+.status--sold {
+  background: color-mix(in srgb, #c87941 15%, transparent);
+  color: #c87941;
+  border-color: color-mix(in srgb, #c87941 40%, transparent);
+}
+.status--unavailable {
+  background: color-mix(in srgb, var(--text-muted) 12%, transparent);
+  color: var(--text-muted);
+  border-color: color-mix(in srgb, var(--text-muted) 25%, transparent);
+}
+
+/* Badge pinned to bottom-left of card image */
+.painting-card-image .status-badge {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  z-index: 2;
+}
+
+/* Badge inline in meta table (no positioning) */
+.painting-meta-table .status-badge {
+  position: static;
+}
+
+/* ── Painting image button (clickable for lightbox) ─────────── */
+.painting-image-btn {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: zoom-in;
+  position: relative;
+}
+.painting-image-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.lightbox-hint {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.75);
+  background: rgba(0,0,0,0.5);
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+.painting-image-btn:hover .lightbox-hint,
+.painting-image-btn:focus .lightbox-hint {
+  opacity: 1;
+}

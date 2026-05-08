@@ -205,6 +205,7 @@ function renderCards(paintings) {
           loading="lazy"
           onerror="this.parentElement.innerHTML='<div class=\\'painting-card-placeholder\\'>${encodeURIComponent(p.title)}</div>'"
         />
+        ${p.status ? (() => { const s = getStatusInfo(p.status); return `<span class="status-badge ${s.cls}">${s.label}</span>`; })() : ""}
       </div>
       <div class="painting-card-info">
         <p class="painting-card-title">${p.title}</p>

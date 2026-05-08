@@ -47,6 +47,9 @@
     ? getImageUrl(painting.image)
     : `https://placehold.co/900x1100/242019/a89880?text=${encodeURIComponent(painting.title)}`;
 
+  // Status badge
+  const statusInfo = getStatusInfo(painting.status || "not-available");
+
   // Build tags HTML
   const tagsHTML = painting.tags
     .map((tag) => `<span class="painting-tag">${tag}</span>`)
@@ -66,15 +69,21 @@
 
     <div class="painting-detail-layout fade-up fade-up-delay-1">
 
-      <!-- Image -->
+      <!-- Image (click to open lightbox) -->
       <div>
-        <img
-          class="painting-detail-image"
-          src="${imageSrc}"
-          alt="${painting.title} — ${painting.medium}, ${formattedDate}"
-          loading="eager"
-          onerror="this.src='https://placehold.co/900x1100/242019/6e6358?text=Image+not+found'"
-        />
+        <button class="painting-image-btn" id="openLightbox" aria-label="View full size">
+          <img
+            class="painting-detail-image"
+            src="${imageSrc}"
+            alt="${painting.title} — ${painting.medium}, ${formattedDate}"
+            loading="eager"
+            onerror="this.src='https://placehold.co/900x1100/242019/6e6358?text=Image+not+found'"
+          />
+          <span class="lightbox-hint">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            View full size
+          </span>
+        </button>
       </div>
 
       <!-- Metadata sidebar -->
@@ -99,6 +108,10 @@
             <td>Size</td>
             <td>${painting.dimensions}</td>
           </tr>` : ""}
+          <tr>
+            <td>Status</td>
+            <td><span class="status-badge ${statusInfo.cls}">${statusInfo.label}</span></td>
+          </tr>
         </table>
 
         ${painting.description ? `
@@ -116,10 +129,43 @@
   `;
 
   // ── Append bottom sections ────────────────────────────────
+  renderMainImageLightbox(imageSrc, painting.title);
   renderPrevNext(painting);
   renderProcessStrip(painting);
   renderRelated(painting);
 })();
+
+// ─── Main image lightbox ──────────────────────────────────────────────────────
+function renderMainImageLightbox(imageSrc, title) {
+  const overlay = document.createElement("div");
+  overlay.className = "lightbox-overlay";
+  overlay.id = "mainLightbox";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", title);
+  overlay.innerHTML = `
+    <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+    <img src="${imageSrc}" alt="${title}" />
+  `;
+  document.body.appendChild(overlay);
+
+  function open() {
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+    overlay.querySelector(".lightbox-close").focus();
+  }
+  function close() {
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  const btn = document.getElementById("openLightbox");
+  if (btn) btn.addEventListener("click", open);
+
+  overlay.querySelector(".lightbox-close").addEventListener("click", close);
+  overlay.addEventListener("click", (e) => { if (e.target === overlay) close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+}
 
 // ─── Prev / Next (across full collection) ────────────────────────────────────
 function renderPrevNext(currentPainting) {
