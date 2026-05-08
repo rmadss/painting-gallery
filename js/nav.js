@@ -75,7 +75,7 @@ function updateToggleIcon(btn) {
 
   navbar.innerHTML = `
     <nav class="nav-inner">
-      <a href="index.html" class="nav-logo">the archive</a>
+      <a href="index.html" class="nav-logo">The rmadss Gallery</a>
 
       <div style="display:flex; align-items:center; gap:0.75rem;">
         <!-- Theme toggle -->

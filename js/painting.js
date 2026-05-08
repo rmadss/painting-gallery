@@ -30,7 +30,7 @@
   }
 
   // ── Update page <title> and meta ─────────────────────────
-  document.title = `${painting.title} — The Archive`;
+  document.title = `${painting.title} — The rmadss Gallery`;
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) {
     metaDesc.setAttribute(
