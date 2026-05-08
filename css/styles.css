@@ -319,7 +319,7 @@ a:hover { color: var(--accent); }
 }
 
 .hero-image-col {
-  flex: 1;
+  flex: 1.2;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -333,10 +333,14 @@ a:hover { color: var(--accent); }
 
 .hero-image-wrapper {
   position: relative;
-  width: 340px;
+  width: 100%;
+  max-width: 600px;
   aspect-ratio: 3/4;
   overflow: hidden;
   border: 1px solid var(--border);
+  padding: 1.25rem;
+  background: var(--surface);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
 }
 
 .hero-image-wrapper img {
@@ -345,6 +349,7 @@ a:hover { color: var(--accent); }
   object-fit: cover;
   filter: saturate(0.85);
   transition: filter 0.4s ease;
+  display: block;
 }
 
 .hero-image-wrapper:hover img {
@@ -353,7 +358,7 @@ a:hover { color: var(--accent); }
 
 @media (max-width: 800px) {
   .hero-layout { flex-direction: column; gap: 2.5rem; }
-  .hero-image-wrapper { width: 100%; max-width: 360px; }
+  .hero-image-wrapper { width: 100%; max-width: 420px; }
 }
 
 /* ── About page ───────────────────────────────────────────── */
@@ -1012,6 +1017,92 @@ a:hover { color: var(--accent); }
   color: var(--text-muted);
   margin-top: 2px;
   letter-spacing: 0.05em;
+}
+
+/* ── Timeline mobile overrides ────────────────────────────── */
+@media (max-width: 639px) {
+  /* Controls bar tighter */
+  .timeline-controls {
+    padding: 0.6rem 0;
+    margin-bottom: 2rem;
+  }
+
+  /* Search + dropdown stack full-width */
+  .timeline-search-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .search-input-wrapper {
+    min-width: 0;
+  }
+
+  .medium-select {
+    width: 100%;
+  }
+
+  /* Tag pills: single horizontal scrollable row */
+  .tag-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+    /* fade-out right edge hint */
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  }
+  .tag-filters::-webkit-scrollbar { display: none; }
+
+  .tag-pill {
+    flex-shrink: 0;
+    /* bigger tap target */
+    padding: 0.35rem 0.85rem;
+    font-size: 0.72rem;
+  }
+
+  /* Spine left margin smaller on mobile */
+  .timeline-body {
+    padding-left: 1.75rem;
+  }
+  .era-section::before {
+    left: -1.75rem;
+  }
+
+  /* Era paintings: 2-col on phones */
+  .era-paintings {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+
+  /* Grid view scroll hint on mobile */
+  .tl-grid-scroll {
+    /* subtle right-edge fade to hint at horizontal scroll */
+    -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
+    mask-image: linear-gradient(to right, black 88%, transparent 100%);
+  }
+
+  /* Compact era label */
+  .tl-era-label {
+    width: 110px;
+  }
+  .tl-ruler {
+    margin-left: 110px;
+  }
+  .tl-era-row {
+    min-width: calc(500px + 110px);
+  }
+
+  /* Larger dot tap targets on touch */
+  .tl-dot {
+    width: 32px;
+    height: 32px;
+  }
+  .tl-dot-inner {
+    width: 10px;
+    height: 10px;
+  }
 }
 
 /* ── Painting Detail Page ─────────────────────────────────── */

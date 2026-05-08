@@ -12,11 +12,12 @@
  */
 
 // ─── State ────────────────────────────────────────────────────────────────────
+const isMobile = window.innerWidth < 640;
 const state = {
   query: "",
   activeTag: "",
   activeMedium: "",
-  view: "grid", // "grid" | "cards"
+  view: isMobile ? "cards" : "grid", // default to cards on mobile
 };
 
 // ─── DOM refs ─────────────────────────────────────────────────────────────────
@@ -52,17 +53,22 @@ function init() {
   const viewToggle = document.getElementById("viewToggle");
   const iconGrid   = document.getElementById("iconGrid");
   const iconList   = document.getElementById("iconList");
-  viewToggle.addEventListener("click", () => {
-    state.view = state.view === "grid" ? "cards" : "grid";
+
+  // Apply the initial view state (respects mobile default)
+  function applyViewState() {
     const isCards = state.view === "cards";
     timelineBody.classList.toggle("view-cards", isCards);
     timelineBody.classList.toggle("view-grid",  !isCards);
-    // iconList = grid/card icon (visible in timeline mode → click goes to cards)
-    // iconGrid = timeline icon (visible in card mode → click goes back to timeline)
     iconList.style.display = isCards ? "none" : "";
     iconGrid.style.display = isCards ? ""     : "none";
     viewToggle.setAttribute("title",      isCards ? "Switch to timeline view" : "Switch to card view");
     viewToggle.setAttribute("aria-label", isCards ? "Switch to timeline view" : "Switch to card view");
+  }
+  applyViewState();
+
+  viewToggle.addEventListener("click", () => {
+    state.view = state.view === "grid" ? "cards" : "grid";
+    applyViewState();
     filterPaintings();
   });
 }
