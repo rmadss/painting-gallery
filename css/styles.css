@@ -769,6 +769,36 @@ a:hover { color: var(--accent); }
   background: var(--bg-card-hover);
 }
 
+/* ── Jump controls (First / Latest) ──────────────────────── */
+.tl-jump-controls {
+  display: flex;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+.tl-jump-btn {
+  height: 2.1rem;
+  padding: 0 0.65rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.tl-jump-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border);
+  background: var(--bg-card-hover);
+}
+/* Hide jump controls when in card view */
+#timelineBody.view-cards ~ * .tl-jump-controls,
+#timelineBody.view-cards + * .tl-jump-controls { display: none; }
+/* Show/hide via body class toggled by JS (simpler approach) */
+body.tl-view-cards .tl-jump-controls { display: none; }
+
 /* ── Collapsed (compact 3-col) view ──────────────────────── */
 .timeline-body.collapsed .era-paintings {
   display: grid;
@@ -860,18 +890,26 @@ a:hover { color: var(--accent); }
   overflow-x: auto;
   overflow-y: visible;
   -webkit-overflow-scrolling: touch;
-  /* Because overflow-x:auto forces overflow-y to at least auto,
-     we use a padding trick: give enough bottom padding so tooltips
-     (which drop downward) have room past the last row. */
   padding-top: 0;
   margin-top: 0;
   padding-bottom: 0;
   padding-bottom: 1.5rem;
+  cursor: grab;
+  user-select: none;
+}
+/* While dragging */
+.tl-grid-scroll.panning {
+  cursor: grabbing;
+  user-select: none;
+}
+/* Restore pointer for clickable dots */
+.tl-grid-scroll .tl-dot {
+  cursor: pointer;
 }
 
 .tl-grid {
   overflow: visible;
-  min-width: max-content;
+  min-width: 780px; /* label (180) + track min (600) */
   margin-bottom: 160px;
 }
 

@@ -20,6 +20,18 @@ const state = {
   view: isMobile ? "cards" : "grid", // default to cards on mobile
 };
 
+// ─── Zoom / Pan state ─────────────────────────────────────────────────────────
+// Painting dots use left:X% so widening the track repositions them automatically.
+// We only control the pixel width of the track area.
+const TL_LABEL_W   = 180;   // must match .tl-era-label width in CSS
+const TL_TRACK_MIN = 600;
+const TL_TRACK_MAX = 14000;
+const TL_TRACK_DEF = 1800;
+let   tlTrackPx    = TL_TRACK_DEF;
+
+// Filled by buildTimeline; used by rebuildRuler
+const tlBounds = { globalStart: 0, globalEnd: 0, totalMonths: 1 };
+
 // ─── DOM refs ─────────────────────────────────────────────────────────────────
 const timelineBody  = document.getElementById("timelineBody");
 const searchInput   = document.getElementById("searchInput");
@@ -49,6 +61,12 @@ function init() {
   searchInput.addEventListener("input", debounce(onSearchChange, 200));
   mediumSelect.addEventListener("change", onMediumChange);
 
+  // Jump-to buttons (only visible in grid view)
+  const btnFirst  = document.getElementById("jumpFirst");
+  const btnLatest = document.getElementById("jumpLatest");
+  if (btnFirst)  btnFirst.addEventListener("click",  jumpToFirst);
+  if (btnLatest) btnLatest.addEventListener("click", jumpToLatest);
+
   // View toggle: grid ↔ cards
   const viewToggle = document.getElementById("viewToggle");
   const iconGrid   = document.getElementById("iconGrid");
@@ -63,6 +81,9 @@ function init() {
     iconGrid.style.display = isCards ? ""     : "none";
     viewToggle.setAttribute("title",      isCards ? "Switch to timeline view" : "Switch to card view");
     viewToggle.setAttribute("aria-label", isCards ? "Switch to timeline view" : "Switch to card view");
+    // Show jump controls only in grid view
+    const jumpControls = document.getElementById("jumpControls");
+    if (jumpControls) jumpControls.style.display = isCards ? "none" : "";
   }
   applyViewState();
 
@@ -149,19 +170,14 @@ function buildTimeline() {
   const globalEnd   = toMonthNum(allBounds[allBounds.length - 1]) + PADDING_MONTHS;
   const totalMonths = Math.max(globalEnd - globalStart, 1);
 
-  // Build the ruler (year ticks)
-  const startYear = parseInt(allBounds[0]);
-  const endYear   = parseInt(allBounds[allBounds.length - 1]);
-  let rulerHTML = "";
-  for (let y = startYear; y <= endYear + 1; y++) {
-    const pct = ((toMonthNum(`${y}-01`) - globalStart) / totalMonths) * 100;
-    if (pct < 0 || pct > 102) continue;
-    rulerHTML += `<span class="tl-ruler-tick" style="left:${pct.toFixed(2)}%">${y}</span>`;
-  }
+  // Store for dynamic ruler (rebuildRuler uses these)
+  tlBounds.globalStart = globalStart;
+  tlBounds.globalEnd   = globalEnd;
+  tlBounds.totalMonths = totalMonths;
 
   const grid = document.createElement("div");
   grid.className = "tl-grid";
-  grid.innerHTML = `<div class="tl-ruler">${rulerHTML}</div>`;
+  grid.innerHTML = `<div class="tl-ruler"></div>`; // populated by rebuildRuler()
 
   eras.forEach((era) => {
     const row = document.createElement("div");
@@ -241,6 +257,9 @@ function buildTimeline() {
   gridScroll.appendChild(grid);
   timelineBody.appendChild(gridScroll);
 
+  applyGridWidth();           // sets initial px width + builds ruler
+  attachZoomPanHandlers(gridScroll);  // zoom + drag-to-pan + touch pinch
+
   // ── 2. Card sections (alternate view) ─────────────────────
   const cardSections = document.createElement("div");
   cardSections.className = "tl-card-sections";
@@ -290,6 +309,161 @@ function buildTimeline() {
       grid2.appendChild(buildPaintingCard(painting, era));
     });
   });
+}
+
+// ─── Zoom / Pan functions ─────────────────────────────────────────────────────
+
+/**
+ * Applies the current tlTrackPx width to the DOM grid and rebuilds ruler ticks.
+ */
+function applyGridWidth() {
+  const grid = document.querySelector(".tl-grid");
+  if (!grid) return;
+  grid.style.width = (TL_LABEL_W + tlTrackPx) + "px";
+  rebuildRuler();
+}
+
+/**
+ * Rebuilds the ruler tick marks with density appropriate for the current zoom.
+ * At low zoom: yearly ticks. At high zoom: monthly ticks.
+ */
+function rebuildRuler() {
+  const ruler = document.querySelector(".tl-ruler");
+  if (!ruler) return;
+  ruler.style.minWidth = tlTrackPx + "px";
+
+  const pxPerMonth = tlTrackPx / tlBounds.totalMonths;
+  let tickInterval; // months between ticks
+  if      (pxPerMonth >= 60) tickInterval = 1;
+  else if (pxPerMonth >= 25) tickInterval = 3;
+  else if (pxPerMonth >= 12) tickInterval = 6;
+  else if (pxPerMonth >= 5)  tickInterval = 12;
+  else if (pxPerMonth >= 2)  tickInterval = 24;
+  else                        tickInterval = 60;
+
+  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun",
+                  "Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  // Align first tick to a calendar boundary
+  const firstTick = Math.ceil(tlBounds.globalStart / tickInterval) * tickInterval;
+  let html = "";
+
+  for (let m = firstTick; m <= tlBounds.globalEnd + tickInterval; m += tickInterval) {
+    const pct = ((m - tlBounds.globalStart) / tlBounds.totalMonths) * 100;
+    if (pct < -1 || pct > 103) continue;
+    const year  = Math.floor(m / 12);
+    const month = m % 12; // 0 = Jan
+    let label;
+    if      (tickInterval >= 12) label = String(year);
+    else if (tickInterval >= 3)  label = `${MONTHS[month]} ${year}`;
+    else label = month === 0 ? `Jan ${year}` : MONTHS[month];
+    html += `<span class="tl-ruler-tick" style="left:${pct.toFixed(2)}%">${label}</span>`;
+  }
+  ruler.innerHTML = html;
+}
+
+/**
+ * Attaches zoom (Ctrl+wheel), drag-to-pan, and touch-pinch-zoom to the
+ * horizontal scroll container.
+ */
+function attachZoomPanHandlers(container) {
+  // ── Ctrl / Cmd + wheel  →  zoom ───────────────────────────
+  let rafPending = false;
+  container.addEventListener("wheel", (e) => {
+    if (!e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      rafPending = false;
+      const rect      = container.getBoundingClientRect();
+      const cursorX   = e.clientX - rect.left;
+      // Fraction of the track that is to the left of the cursor
+      const scrollFrac = Math.max(0, Math.min(1,
+        (container.scrollLeft + cursorX - TL_LABEL_W) / tlTrackPx
+      ));
+      const factor   = e.deltaY > 0 ? 1.14 : 1 / 1.14;
+      const newTrack = Math.max(TL_TRACK_MIN, Math.min(TL_TRACK_MAX, tlTrackPx * factor));
+      if (newTrack === tlTrackPx) return;
+      const delta = newTrack - tlTrackPx;
+      tlTrackPx   = newTrack;
+      applyGridWidth();
+      container.scrollLeft += delta * scrollFrac;
+    });
+  }, { passive: false });
+
+  // ── Drag to pan ────────────────────────────────────────────
+  let isDragging     = false;
+  let dragStartX     = 0;
+  let dragScrollStart = 0;
+
+  container.addEventListener("mousedown", (e) => {
+    if (e.button !== 0) return;
+    // Don't hijack clicks on dots or tooltips
+    if (e.target.closest(".tl-dot, .tl-tooltip")) return;
+    isDragging      = true;
+    dragStartX      = e.clientX;
+    dragScrollStart = container.scrollLeft;
+    container.classList.add("panning");
+    e.preventDefault();
+  });
+  document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    container.scrollLeft = dragScrollStart - (e.clientX - dragStartX);
+  });
+  document.addEventListener("mouseup", () => {
+    if (!isDragging) return;
+    isDragging = false;
+    container.classList.remove("panning");
+  });
+
+  // ── Touch pinch zoom ───────────────────────────────────────
+  let pinchDist0      = null;
+  let pinchScrollFrac = 0;
+
+  container.addEventListener("touchstart", (e) => {
+    if (e.touches.length !== 2) return;
+    pinchDist0 = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+    const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    const rect  = container.getBoundingClientRect();
+    pinchScrollFrac = Math.max(0, Math.min(1,
+      (container.scrollLeft + midX - rect.left - TL_LABEL_W) / tlTrackPx
+    ));
+  }, { passive: true });
+
+  container.addEventListener("touchmove", (e) => {
+    if (e.touches.length !== 2 || pinchDist0 === null) return;
+    e.preventDefault();
+    const dist  = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+    const factor   = dist / pinchDist0;
+    pinchDist0     = dist;
+    const newTrack = Math.max(TL_TRACK_MIN, Math.min(TL_TRACK_MAX, tlTrackPx * factor));
+    const delta    = newTrack - tlTrackPx;
+    tlTrackPx      = newTrack;
+    applyGridWidth();
+    container.scrollLeft += delta * pinchScrollFrac;
+  }, { passive: false });
+
+  container.addEventListener("touchend",    () => { pinchDist0 = null; });
+  container.addEventListener("touchcancel", () => { pinchDist0 = null; });
+}
+
+/** Scroll the grid to the start (first painting). */
+function jumpToFirst() {
+  const gs = document.querySelector(".tl-grid-scroll");
+  if (gs) gs.scrollTo({ left: 0, behavior: "smooth" });
+}
+
+/** Scroll the grid to the end (latest painting). */
+function jumpToLatest() {
+  const gs = document.querySelector(".tl-grid-scroll");
+  if (gs) gs.scrollTo({ left: gs.scrollWidth, behavior: "smooth" });
 }
 
 // ─── Date helpers ─────────────────────────────────────────────────────────────
