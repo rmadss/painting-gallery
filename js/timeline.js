@@ -257,6 +257,13 @@ function buildTimeline() {
   gridScroll.appendChild(grid);
   timelineBody.appendChild(gridScroll);
 
+  // Fit the full timeline into the visible container width on first load.
+  // scrollWidth of gridScroll isn't reliable yet (not in DOM long enough),
+  // so use the page container width minus the era label column.
+  const containerEl = document.querySelector(".container");
+  const availableW  = (containerEl ? containerEl.clientWidth : window.innerWidth) - TL_LABEL_W - 32;
+  tlTrackPx = Math.max(TL_TRACK_MIN, Math.min(TL_TRACK_MAX, availableW));
+
   applyGridWidth();           // sets initial px width + builds ruler
   attachZoomPanHandlers(gridScroll);  // zoom + drag-to-pan + touch pinch
 
